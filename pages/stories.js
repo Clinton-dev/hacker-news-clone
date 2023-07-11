@@ -15,10 +15,9 @@ import store from "../store.js";
 export default async function Stories(path) {
   let stories = null;
   let hasStories = false;
-  let favorites = null;
+  const { favorites } = store.getState();
 
   try {
-    favorites = store.getState();
     stories = await getStories(path);
     hasStories = stories.length > 0;
   } catch (error) {
@@ -40,6 +39,11 @@ export default async function Stories(path) {
         : "<div class='center-container'><img src='../images/notfound_thumbs_broken_404_icon.png'/> <h4 class='error'>No stories found, try later!!!</h4></div>"
     }
   </div>`;
+
+  const favoriteBtns = document.querySelectorAll(".favorite");
+  favoriteBtns.forEach((favoriteBtn) => {
+    favoriteBtn.addEventListener("click", addfavorite);
+  });
 }
 
 async function getStories(path) {
@@ -57,6 +61,16 @@ async function getStories(path) {
   const stories = await response.json();
 
   return stories;
+}
+
+function addfavorite() {
+  const story = JSON.parse(this.getAttribute("data-story"));
+  const action = {
+    type: "ADD_FAVORITE",
+    payload: { favorite: story },
+  };
+  store.dispatch(action);
+  // call function to render page with updated infor
 }
 
 // https://node-hnapi.herokuapp.com

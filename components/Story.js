@@ -1,15 +1,16 @@
-export default function Story({
-  index,
-  title,
-  domain,
-  url,
-  points,
-  user,
-  time_ago,
-  id,
-  comments_count,
-  isFavorite,
-}) {
+export default function Story(story) {
+  const {
+    index,
+    title,
+    domain,
+    url,
+    points,
+    user,
+    time_ago,
+    id,
+    comments_count,
+    isFavorite,
+  } = story;
   return `<div class="story">
   <div>
     <span class="gray">${index || ""}</span>
@@ -24,8 +25,12 @@ export default function Story({
             ${comments_count} comments
         </a>
         |
-        <span class="favorite">
-            ${isFavorite? `<img class="heart" src="../images/unheart_icon.svg">`: `<img class="heart" src="../images/heart_rate_icon.svg">`}
+        <span class="favorite" data-story='${JSON.stringify(story)}'>
+            ${
+              isFavorite
+                ? `<img class="heart" src="../images/unheart_icon.svg">`
+                : `<img class="heart" src="../images/heart_rate_icon.svg">`
+            }
             ${isFavorite ? "Remove from favorites" : "Add to favorites"}
         </span>
     </div>
