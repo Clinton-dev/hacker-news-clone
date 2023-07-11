@@ -25,7 +25,7 @@ export default function Story({
         </a>
         |
         <span class="favorite">
-            <img class="heart" src="../images/heart_rate_icon.svg">
+            ${isFavorite? `<img class="heart" src="../images/unheart_icon.svg">`: `<img class="heart" src="../images/heart_rate_icon.svg">`}
             ${isFavorite ? "Remove from favorites" : "Add to favorites"}
         </span>
     </div>
