@@ -6,8 +6,7 @@ import store from "../store.js";
 
 // For pages start with small case while for components start with Capital case
 
-// TODO: Add event listeners to all favorite
-// create a method that adds favorite story to the global store
+// TODO:
 // Create favorites page
 
 // Add loader to page while it fetches stories from api
@@ -40,9 +39,16 @@ export default async function Stories(path) {
     }
   </div>`;
 
-  const favoriteBtns = document.querySelectorAll(".favorite");
-  favoriteBtns.forEach((favoriteBtn) => {
-    favoriteBtn.addEventListener("click", addfavorite);
+  document.querySelectorAll(".favorite").forEach((favoriteBtn) => {
+    favoriteBtn.addEventListener("click", async function () {
+      const story = JSON.parse(this.getAttribute("data-story"));
+      const isFavorited = checkFavorites(favorites, story);
+      store.dispatch({
+        type: isFavorited ? "REMOVE_FAVORITE" : "ADD_FAVORITE",
+        payload: { favorite: story },
+      });
+      await Stories(path);
+    });
   });
 }
 
@@ -61,16 +67,6 @@ async function getStories(path) {
   const stories = await response.json();
 
   return stories;
-}
-
-function addfavorite() {
-  const story = JSON.parse(this.getAttribute("data-story"));
-  const action = {
-    type: "ADD_FAVORITE",
-    payload: { favorite: story },
-  };
-  store.dispatch(action);
-  // call function to render page with updated infor
 }
 
 // https://node-hnapi.herokuapp.com
