@@ -1,3 +1,5 @@
+// Handle global State
+
 const initialState = {
   favorites: [],
 };

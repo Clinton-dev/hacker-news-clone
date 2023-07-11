@@ -8,6 +8,7 @@ export default function Story({
   time_ago,
   id,
   comments_count,
+  isFavorite,
 }) {
   return `<div class="story">
   <div>
@@ -25,7 +26,7 @@ export default function Story({
         |
         <span class="favorite">
             <img class="heart" src="../images/heart_rate_icon.svg">
-            Add to favorites
+            ${isFavorite ? "Remove from favorites" : "Add to favorites"}
         </span>
     </div>
   </div>
