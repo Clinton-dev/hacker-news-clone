@@ -6,6 +6,12 @@ import store from "../store.js";
 
 // For pages start with small case while for components start with Capital case
 
+// TODO: Add event listeners to all favorite
+// create a method that adds favorite story to the global store
+// Create favorites page
+
+// Add loader to page while it fetches stories from api
+
 export default async function Stories(path) {
   let stories = null;
   let hasStories = false;
