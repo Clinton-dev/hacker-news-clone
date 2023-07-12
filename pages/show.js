@@ -20,6 +20,21 @@ export default async function Show(path) {
         : ""
     }
   </div>`;
+
+  document.querySelectorAll(".favorite").forEach((favoriteBtn) => {
+    favoriteBtn.addEventListener("click", function () {
+      // parse json object obtained from data-story
+      const favorite = JSON.parse(decodeURIComponent(this.dataset.story));
+      const isFavorited = checkFavorites(favorites, favorite);
+      // Add to global favorites store using reducer function
+      store.dispatch({
+        type: isFavorited ? "REMOVE_FAVORITE" : "ADD_FAVORITE",
+        payload: { favorite },
+      });
+      // rerender show page
+      Show(path);
+    });
+  });
 }
 
 async function getShows(path) {
