@@ -295,3 +295,7 @@ textarea {
     display: flex;
     align-items: center;
 }
+
+img#unhappy-icon {
+  height: 10rem;
+}
