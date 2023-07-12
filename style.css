@@ -299,3 +299,7 @@ textarea {
 img#unhappy-icon {
   height: 10rem;
 }
+
+.job-detail {
+  margin-bottom: 1rem;
+}
