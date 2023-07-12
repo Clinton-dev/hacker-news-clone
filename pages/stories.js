@@ -41,7 +41,8 @@ export default async function Stories(path) {
 
   document.querySelectorAll(".favorite").forEach((favoriteBtn) => {
     favoriteBtn.addEventListener("click", async function () {
-      const story = JSON.parse(this.dataset.story);
+      const story = JSON.parse(decodeURIComponent(this.dataset.story));
+
       const isFavorited = checkFavorites(favorites, story);
       store.dispatch({
         type: isFavorited ? "REMOVE_FAVORITE" : "ADD_FAVORITE",

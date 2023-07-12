@@ -11,6 +11,8 @@ export default function Story(story) {
     comments_count,
     isFavorite,
   } = story;
+  const encodedStory = encodeURIComponent(JSON.stringify(story));
+
   return `<div class="story">
   <div>
     <span class="gray">${index || ""}</span>
@@ -25,7 +27,7 @@ export default function Story(story) {
             ${comments_count} comments
         </a>
         |
-        <span class="favorite" data-story="${JSON.stringify(story)}">
+        <span class="favorite" data-story="${encodedStory}">
             ${
               isFavorite
                 ? `<img class="heart" src="../images/unheart_icon.svg">`
