@@ -1,5 +1,6 @@
 import View from "../utils/view.js";
 import Story from "../components/Story.js";
+import Loader from "../components/Loader.js";
 import baseUrl from "../utils/baseUrl.js";
 import checkFavorites from "../utils/checkFavorites.js";
 import store from "../store.js";
@@ -16,6 +17,7 @@ export default async function Stories(path) {
   const { favorites } = store.getState();
 
   try {
+    View.innerHTML = Loader();
     stories = await getStories(path);
     hasStories = stories.length > 0;
   } catch (error) {
@@ -23,19 +25,20 @@ export default async function Stories(path) {
   }
 
   View.innerHTML = `<div>
-    ${
-      hasStories
-        ? stories
-            .map((story, index) =>
-              Story({
-                ...story,
-                index: index + 1,
-                isFavorite: checkFavorites(favorites, story),
-              })
-            )
-            .join("")
-        : "<div class='center-container'><img src='../images/notfound_thumbs_broken_404_icon.png'/> <h4 class='error'>No stories found, try later!!!</h4></div>"
-    }
+  ${
+    hasStories
+      ? stories
+          .map((story, index) =>
+            Story({
+              ...story,
+              index: index + 1,
+              isFavorite: checkFavorites(favorites, story),
+            })
+          )
+          .join("")
+      : "<div class='center-container'><img src='../images/notfound_thumbs_broken_404_icon.png'/> <h4 class='error'>No stories found, try later!!!</h4></div>"
+  }
+
   </div>`;
 
   document.querySelectorAll(".favorite").forEach((favoriteBtn) => {
@@ -52,7 +55,7 @@ export default async function Stories(path) {
   });
 }
 
-async function getStories(path) {
+async function getStories(path, isLoading) {
   const isHomeRoute = path === "/";
   const isNewRoute = path === "/new";
   if (isHomeRoute) {

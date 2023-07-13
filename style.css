@@ -311,8 +311,8 @@ img#unhappy-icon {
 }
 
 #loader .dot {
-  height: 2rem;
-  width: 2rem;
+  height: 1.5rem;
+  width: 1.5rem;
   background-color: #313131;
   border-radius: 50%;
    /* name duration timing-function delay iteration-count direction fill-mode; */
@@ -341,7 +341,7 @@ img#unhappy-icon {
 
 @keyframes animate {
   0% {
-    transform: translateY(-17px);
+    transform: translateY(-15px);
   }
   100% {
     transform: translateY(5px);

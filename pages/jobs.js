@@ -1,10 +1,19 @@
 import view from "../utils/view.js";
 import baseUrl from "../utils/baseUrl.js";
 import Job from "../components/Job.js";
+import Loader from "../components/Loader.js";
 
 export default async function Jobs(path) {
-  const jobs = await getJobs(path);
-  const hasJobs = jobs.length > 0;
+  let jobs = null;
+  let hasJobs = false;
+
+  try {
+    view.innerHTML = Loader();
+    jobs = await getJobs(path);
+    hasJobs = jobs.length > 0;
+  } catch (error) {
+    console.error(error);
+  }
 
   view.innerHTML = `<div>
   ${

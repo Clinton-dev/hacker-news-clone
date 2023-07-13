@@ -3,11 +3,20 @@ import Story from "../components/Story.js";
 import baseUrl from "../utils/baseUrl.js";
 import checkFavorites from "../utils/checkFavorites.js";
 import store from "../store.js";
+import Loader from "../components/Loader.js";
 
 export default async function Show(path) {
-  const shows = await getShows(path);
-  const hasShows = shows.length > 0;
+  let hasShows = false;
+  let shows = null;
   const { favorites } = store.getState();
+
+  try {
+    view.innerHTML = Loader();
+    shows = await getShows(path);
+    hasShows = shows.length > 0;
+  } catch (error) {
+    console.error(error);
+  }
 
   view.innerHTML = `<div>
     ${
