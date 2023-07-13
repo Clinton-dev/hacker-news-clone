@@ -1,0 +1,4 @@
+TODO
+ 1. Add loading animation before data is fetched form api or global state
+ 2. How would check for 404 errors
+ 3. Create a pipeline either through google actions or aws code pipeline
