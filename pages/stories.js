@@ -7,9 +7,8 @@ import store from "../store.js";
 // For pages start with small case while for components start with Capital case
 
 // TODO:
-// Create favorites page
 
-// Add loader to page while it fetches stories from api
+// Display loader to stories page while the app waits to it fetches stories from api
 
 export default async function Stories(path) {
   let stories = null;
